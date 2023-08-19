@@ -76,7 +76,7 @@ def _create_completion(model: str, messages: list, stream: bool, **kwargs):
         'aiName': '<div class="mwai-name-text">AI:</div>',
         'model': 'gpt-3.5-turbo',
         'temperature': 0.8,
-        'maxTokens': 1024,
+        'maxTokens': 2048,
         'maxResults': 1,
         'apiKey': '',
         'service': 'openai',

@@ -64,6 +64,10 @@ def build_messages(jailbreak):
     _conversation = request.json['meta']['content']['conversation']
     internet_access = request.json['meta']['content']['internet_access']
     prompt = request.json['meta']['content']['parts'][0]
+    print('prompt',prompt)
+    print('prompt content',prompt['content'])
+    prompt['content'] = 'Discuss the comparative legal systems of European countries, such as ' + prompt['content'] + ' ?'
+    print('prompt content',prompt['content'])
 
     # Add the existing conversation
     conversation = _conversation
@@ -83,8 +87,11 @@ def build_messages(jailbreak):
     conversation.append(prompt)
 
     # Reduce conversation size to avoid API Token quantity error
-    if len(conversation) > 3:
-        conversation = conversation[-4:]
+    """ if len(conversation) > 3:
+        conversation = conversation[-4:] """
+
+    if len(conversation) > 30:
+            conversation = conversation[-31:]
 
     return conversation
 
@@ -99,7 +106,7 @@ def fetch_search_results(query):
     search = get('https://ddg-api.herokuapp.com/search',
                  params={
                      'query': query,
-                     'limit': 3,
+                     'limit': 5,
                  })
 
     snippets = ""
